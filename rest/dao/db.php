@@ -1,9 +1,9 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$schema = "rmu";
+$servername = "sql7.freemysqlhosting.net";
+$username = "sql7610511";
+$password = "eHCwFhXnpw";
+$schema = "sql7610511";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$schema", $username, $password);
