@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 02, 2023 at 02:45 PM
+-- Generation Time: Apr 02, 2023 at 03:07 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `rmu`
 --
-CREATE DATABASE IF NOT EXISTS `rmu` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `rmu`;
 
 -- --------------------------------------------------------
 
