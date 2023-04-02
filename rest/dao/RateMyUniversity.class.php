@@ -141,6 +141,38 @@ class RateMyUniversity {
         $stmt = $this->pdo->query("SELECT * FROM users WHERE university_id=:univid AND isprofessor=1 ");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+          // Get all ratings from the database
+    public function getAllRatings(){
+        $stmt = $this->pdo->query("SELECT * FROM rating ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+          // Get ratings by date from the database
+    public function getRatingByDate($rdate){
+        $stmt = $this->pdo->query("SELECT * FROM rating WHERE ratedate=:rdate");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+         // Get anonymous ratings from the database
+    public function getAnonymousRatings(){
+        $stmt = $this->pdo->query("SELECT * FROM rating WHERE anonymous=1");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        // Get non-anonymous ratings from the database
+    public function getNonAnonymousRatings(){
+        $stmt = $this->pdo->query("SELECT * FROM rating WHERE anonymous=0");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        // Get ratings by professor from the database
+    public function getRatingsByProfessor($pid){
+        $stmt = $this->pdo->query("SELECT * FROM rating r JOIN professorcourses pc ON r.pc_id=pc.id   WHERE pc.professor_id=:pid");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        // Get ratings by student from the database
+    public function getRatingsByStudent($sid){
+        $stmt = $this->pdo->query("SELECT * FROM rating WHERE student_id=:sid");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        
 
 
 
