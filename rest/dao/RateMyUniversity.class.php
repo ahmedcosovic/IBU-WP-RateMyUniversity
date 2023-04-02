@@ -55,6 +55,100 @@ class RateMyUniversity {
         $stmt = $this->pdo->query("SELECT * FROM universities");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    // Get  university by id from the database
+    public function getUniversity($uni_id) {
+        $stmt = $this->pdo->query("SELECT * FROM universities WHERE id=:uni_id");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Get all universities by city from the database
+    public function getAllUniversitiesByCity($city) {
+        $stmt = $this->pdo->query("SELECT * FROM universities WHERE city=:city ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    // Get all universities by county from the database
+    public function getAllUniversitiesByCounty($country) {
+        $stmt = $this->pdo->query("SELECT * FROM universities WHERE country=:country ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    // Get all universities by name from the database
+    public function getAllUniversitiesByName($uname) {
+        $stmt = $this->pdo->query("SELECT * FROM universities WHERE name=:uname ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    
+    // Get all courses from the database
+    public function getAllCourses() {
+        $stmt = $this->pdo->query("SELECT * FROM courses ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Get course by ID from the database
+    public function getCourseById($cid) {
+        $stmt = $this->pdo->query("SELECT * FROM courses WHERE id=:cid ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    // Get course by code from the database
+    public function getCourseByCode($code) {
+    $stmt = $this->pdo->query("SELECT * FROM courses WHERE code=:code ");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Get course by ECTS from the database
+    public function getCourseByECTS($ects) {
+        $stmt = $this->pdo->query("SELECT * FROM courses WHERE ects=:ects ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        // Get professors by course from the database
+    public function getProfessorsByCourse($cid) {
+        $stmt = $this->pdo->query("SELECT * FROM professorcourses WHERE course_id=:cid ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        // Get courses by professor from the database
+    public function getCoursesByProfessor($profid) {
+        $stmt = $this->pdo->query("SELECT * FROM professorcourses WHERE professor_id=:profid ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+          // Get all users from the database
+    public function getAllUsers() {
+        $stmt = $this->pdo->query("SELECT * FROM users");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+         // Get all professors from the database
+    public function getAllProfessors() {
+        $stmt = $this->pdo->query("SELECT * FROM users WHERE isprofessor=1 ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+             // Get all students from the database
+    public function getAllStudents() {
+        $stmt = $this->pdo->query("SELECT * FROM users WHERE isprofessor=0 ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        // Get user by id from the database
+    public function getUserByID($uid) {
+        $stmt = $this->pdo->query("SELECT * FROM users WHERE id=:uid ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+         // Get student by university from the database
+    public function getStudentsByUniversity($univid) {
+        $stmt = $this->pdo->query("SELECT * FROM users WHERE university_id=:univid AND isprofessor=0 ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+         // Get professors by university from the database
+    public function getProfessorsByUniversity($univid) {
+        $stmt = $this->pdo->query("SELECT * FROM users WHERE university_id=:univid AND isprofessor=1 ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+
+
+
+
+
+
+
     
     // Update a university in the database
     public function updateUniversity($id, $name, $location, $rating) {
@@ -67,5 +161,6 @@ class RateMyUniversity {
         $stmt = $this->pdo->prepare("DELETE FROM universities WHERE id = :id");
         $stmt->execute(array(':id' => $id));
     }
+
 }
 ?>
