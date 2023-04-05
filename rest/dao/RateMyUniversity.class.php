@@ -176,7 +176,54 @@ class RateMyUniversity {
 
 
 
+    // Delete a course from the database
+public function deleteCourse($id) {
+    $stmt = $this->pdo->prepare("DELETE FROM courses WHERE id = :id");
+    $stmt->execute(array(':id' => $id));
+    }
+    
+    // Delete a student from the database
+    public function deleteStudent($id) {
+    $stmt = $this->pdo->prepare("DELETE FROM users WHERE id = :id AND isprofessor = 0");
+    $stmt->execute(array(':id' => $id));
+    }
+    
+    // Delete a professor from the database
+    public function deleteProfessor($id) {
+    $stmt = $this->pdo->prepare("DELETE FROM users WHERE id = :id AND isprofessor = 1");
+    $stmt->execute(array(':id' => $id));
+    }
+    
+    // Delete a rating
+    public function deleteRating($id) {
+    $stmt = $this->pdo->prepare("DELETE FROM ratings WHERE id = :id");
+    $stmt->execute(array(':id' => $id));
+    }
 
+
+    // Update a course in the database
+public function updateCourse($id, $name, $ects, $code, $description) {
+    $stmt = $this->pdo->prepare("UPDATE courses SET name = :name, ects = :ects, code = :code, description = :description WHERE id = :id");
+    $stmt->execute(array(':id' => $id, ':name' => $name, ':ects' => $ects, ':code' => $code, ':description' => $description));
+    }
+    
+    // Update a student in the database
+    public function updateStudent($id, $username, $password, $email, $university_id, $firstname, $lastname, $phone) {
+    $stmt = $this->pdo->prepare("UPDATE users SET username = :username, password = :password, email = :email, university_id = :university_id, firstname = :firstname, lastname = :lastname, phone = :phone WHERE id = :id AND isprofessor = 0");
+    $stmt->execute(array(':id' => $id, ':username' => $username, ':password' => $password, ':email' => $email, ':university_id' => $university_id, ':firstname' => $firstname, ':lastname' => $lastname, ':phone' => $phone));
+    }
+    
+    // Update a professor in the database
+    public function updateProfessor($id, $username, $password, $email, $university_id, $firstname, $lastname, $phone) {
+    $stmt = $this->pdo->prepare("UPDATE users SET username = :username, password = :password, email = :email, university_id = :university_id, firstname = :firstname, lastname = :lastname, phone = :phone WHERE id = :id AND isprofessor = 1");
+    $stmt->execute(array(':id' => $id, ':username' => $username, ':password' => $password, ':email' => $email, ':university_id' => $university_id, ':firstname' => $firstname, ':lastname' => $lastname, ':phone' => $phone));
+    }
+    
+    // Update a rating
+    public function updateRating($id, $rating) {
+    $stmt = $this->pdo->prepare("UPDATE ratings SET rating = :rating WHERE id = :id");
+    $stmt->execute(array(':id' => $id, ':rating' => $rating));
+    }
 
 
 
