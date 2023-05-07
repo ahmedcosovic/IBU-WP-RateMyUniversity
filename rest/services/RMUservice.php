@@ -28,13 +28,13 @@ class RMUService {
         return $this->dao->getAllCourses();
     }
     public function getCourseById($id){
-        return $this->dao->getCoursesById($id);
+        return $this->dao->getCourseById($id);
     }
     public function getCourseByCode($id){
-        return $this->dao->getCoursesByCode($id);
+        return $this->dao->getCourseByCode($id);
     }
     public function getCourseByEcts($id){
-        return $this->dao->getCoursesByEcts($id);
+        return $this->dao->getCourseByEcts($id);
     }
     public function getPcByCourse($id){
         return $this->dao->getPcByCourse($id);
@@ -51,20 +51,20 @@ class RMUService {
     public function getAllStudents(){
         return $this->dao->getAllStudents();
     }
-    public function getUsersById($id){
-        return $this->dao->getUsersById($id);
+    public function getUserById($id){
+        return $this->dao->getUserById($id);
     }
-    public function getStudentsByUniversity($id){
-        return $this->dao->getStudentsByUniversity($id);
+    public function getStudentByUniversity($id){
+        return $this->dao->getStudentByUniversity($id);
     }
-    public function getProfessorsByUniversity($id){
-        return $this->dao->getProfessorsByUniversity($id);
+    public function getProfessorByUniversity($id){
+        return $this->dao->getProfessorByUniversity($id);
     }
     public function getAllRatings(){
         return $this->dao->getAllRatings();
     }
-    public function getRatingsByDate($id){
-        return $this->dao->getRatingsByDate($id);
+    public function getRatingByDate($id){
+        return $this->dao->getRatingByDate($id);
     }
     public function getAllAnonymousRatings(){
         return $this->dao->getAllAnonymousRatings();

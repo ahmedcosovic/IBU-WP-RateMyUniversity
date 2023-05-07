@@ -140,7 +140,7 @@ class RMUDao {
         return $result;
     }
 
-    public function getUsersById($uid){
+    public function getUserById($uid){
         $query = "SELECT * FROM users WHERE id=$uid ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -148,7 +148,7 @@ class RMUDao {
         return $result;
     }
 
-    public function getStudentsByUniversity($univid){
+    public function getStudentByUniversity($univid){
         $query = "SELECT * FROM users WHERE university_id=$univid AND isprofessor=0 ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -156,7 +156,7 @@ class RMUDao {
         return $result;
     }
 
-    public function getProfessorsByUniversity($univid){
+    public function getProfessorByUniversity($univid){
         $query = "SELECT * FROM users WHERE university_id=$univid AND isprofessor=1 ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -172,7 +172,7 @@ class RMUDao {
         return $result;
     }
 
-    public function getRatingsByDate($rdate){
+    public function getRatingByDate($rdate){
         $query = "SELECT * FROM rating WHERE ratedate=$rdate";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

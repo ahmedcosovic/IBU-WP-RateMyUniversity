@@ -59,24 +59,24 @@ Flight::route('GET /getAllStudents', function(){
     Flight::json(Flight::rmuService()->getAllStudents());
 });
 
-Flight::route('GET /getUsersById/@id', function($id){
-    Flight::json(Flight::rmuService()->getUsersById($id));
+Flight::route('GET /getUserById/@id', function($id){
+    Flight::json(Flight::rmuService()->getUserById($id));
 });
 
-Flight::route('GET /getStudentsByUniversity/@id', function($id){
-    Flight::json(Flight::rmuService()->getStudentsByUniversity($id));
+Flight::route('GET /getStudentByUniversity/@id', function($id){
+    Flight::json(Flight::rmuService()->getStudentByUniversity($id));
 });
 
-Flight::route('GET /getProfessorsByUniversity/@id', function($id){
-    Flight::json(Flight::rmuService()->getProfessorsByUniversity($id));
+Flight::route('GET /getProfessorByUniversity/@id', function($id){
+    Flight::json(Flight::rmuService()->getProfessorByUniversity($id));
 });
 
 Flight::route('GET /getAllRatings', function(){
     Flight::json(Flight::rmuService()->getAllRatings());
 });
 
-Flight::route('GET /getRatingsByDate/@id', function($id){
-    Flight::json(Flight::rmuService()->getRatingsByDate($id));
+Flight::route('GET /getRatingByDate/@id', function($id){
+    Flight::json(Flight::rmuService()->getRatingByDate($id));
 });
 
 Flight::route('GET /getAllAnonymousRatings', function(){
