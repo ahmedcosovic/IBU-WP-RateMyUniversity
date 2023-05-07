@@ -84,131 +84,131 @@ class RMUDao {
         return $result;
     }
 
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM courses WHERE code=:code ";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+    public function getCourseByCode($code){
+        $query = "SELECT * FROM courses WHERE code=$code ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM courses WHERE ects=:ects ";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+    public function getCourseByEcts($ects){
+        $query = "SELECT * FROM courses WHERE ects=$ects ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM professorcourses WHERE course_id=:cid ";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+    public function getPcByCourse($cid){
+        $query = "SELECT * FROM professorcourses WHERE course_id=$cid ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM professorcourses WHERE professor_id=:profid ";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+    public function getPcByProfessor($profid){
+        $query = "SELECT * FROM professorcourses WHERE professor_id=$profid ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM users";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+    public function getAllUsers(){
+        $query = "SELECT * FROM users";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM users WHERE isprofessor=1 ";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+    public function getAllProfessors(){
+        $query = "SELECT * FROM users WHERE isprofessor=1 ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM users WHERE isprofessor=0 ";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+    public function getAllStudents(){
+        $query = "SELECT * FROM users WHERE isprofessor=0 ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM users WHERE id=:uid ";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+    public function getUsersById($uid){
+        $query = "SELECT * FROM users WHERE id=$uid ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM users WHERE university_id=:univid AND isprofessor=0 ";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+    public function getStudentsByUniversity($univid){
+        $query = "SELECT * FROM users WHERE university_id=$univid AND isprofessor=0 ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM users WHERE university_id=:univid AND isprofessor=1 ";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+    public function getProfessorsByUniversity($univid){
+        $query = "SELECT * FROM users WHERE university_id=$univid AND isprofessor=1 ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM rating ";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+    public function getAllRatings(){
+        $query = "SELECT * FROM rating ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM rating WHERE ratedate=:rdate";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+    public function getRatingsByDate($rdate){
+        $query = "SELECT * FROM rating WHERE ratedate=$rdate";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM rating WHERE anonymous=1";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+    public function getAllAnonymousRatings(){
+        $query = "SELECT * FROM rating WHERE anonymous=1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM rating WHERE anonymous=0";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+    public function getAllNonAnonymousRatings(){
+        $query = "SELECT * FROM rating WHERE anonymous=0";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM rating r JOIN professorcourses pc ON r.pc_id=pc.id   WHERE pc.professor_id=:pid";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
-    // public function getAllUniversities(){
-    //     $query = "SELECT * FROM rating WHERE student_id=:sid";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+    public function getRatingByProfessor($pid){
+        $query = "SELECT * FROM rating r JOIN professorcourses pc ON r.pc_id=pc.id   WHERE pc.professor_id=$pid";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getRatingByStudent($sid){
+        $query = "SELECT * FROM rating WHERE student_id=$sid";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }
 ?>
