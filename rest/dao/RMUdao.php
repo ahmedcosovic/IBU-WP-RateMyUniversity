@@ -45,7 +45,7 @@ class RMUDao {
     }
 
     public function getUniversityByCity($city){
-        $query = "SELECT * FROM universities WHERE city=$city ";
+        $query = "SELECT * FROM universities WHERE city='$city' ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -53,7 +53,7 @@ class RMUDao {
     }
 
     public function getUniversityByCountry($country){
-        $query = "SELECT * FROM universities WHERE country=$country ";
+        $query = "SELECT * FROM universities WHERE country='$country' ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -61,7 +61,7 @@ class RMUDao {
     }
 
     public function getUniversityByName($uname){
-        $query = "SELECT * FROM universities WHERE name=$uname ";
+        $query = "SELECT * FROM universities WHERE name='$uname' ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -85,7 +85,7 @@ class RMUDao {
     }
 
     public function getCourseByCode($code){
-        $query = "SELECT * FROM courses WHERE code=$code ";
+        $query = "SELECT * FROM courses WHERE code='$code' ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
