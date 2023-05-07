@@ -74,8 +74,12 @@ class RMUService {
     }
     public function getRatingByProfessor($id){
         return $this->dao->getRatingByProfessor($id);
-    }public function getRatingByStudent($id){
+    }
+    public function getRatingByStudent($id){
         return $this->dao->getRatingByStudent($id);
+    }
+    public function addUniversity($name, $city, $country){
+        return $this->dao->addUniversity($name, $city, $country);
     }
     
 }

@@ -95,5 +95,9 @@ Flight::route('GET /getRatingByStudent/@id', function($id){
     Flight::json(Flight::rmuService()->getRatingByStudent($id));
 });
 
+Flight::route('POST /addUniversity', function() {
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::rmuService()->addUniversity($data));
+});
 
 ?>

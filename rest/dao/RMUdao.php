@@ -210,5 +210,37 @@ class RMUDao {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    // CREATE FUNCTIONS
+
+    public function addUniversity($name, $city, $country){
+        $query = "INSERT INTO universities (name, city, country) VALUES ($name, $city, $country)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $this->conn->lastInsertId();
+    }
+
+    public function addCourse($code, $name, $ects){
+        $query = "INSERT INTO courses (code, name, ects) VALUES ($code, $name, $ects)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $this->conn->lastInsertId();
+    }
+    public function addUser($name, $email, $password, $isprofessor, $university_id){
+        $query = "INSERT INTO users (name, email, password, isprofessor, university_id) VALUES ($name, $email, $password, $isprofessor, $university_id)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $this->conn->lastInsertId();
+    }
+    
+    public function addRating($user_id, $course_id, $rating, $ratedate){
+        $query = "INSERT INTO rating (user_id, course_id, rating, ratedate) VALUES ($user_id, $course_id, $rating, $ratedate)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $this->conn->lastInsertId();
+    }
+    
+    
+    
 }
 ?>
