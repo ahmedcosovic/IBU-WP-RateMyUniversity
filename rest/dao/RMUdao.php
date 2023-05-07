@@ -76,7 +76,7 @@ class RMUDao {
         return $result;
     }
 
-    public function getCoursesById($cid){
+    public function getCourseById($cid){
         $query = "SELECT * FROM courses WHERE id=$cid ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

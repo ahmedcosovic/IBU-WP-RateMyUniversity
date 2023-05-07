@@ -27,13 +27,13 @@ class RMUService {
     public function getAllCourses(){
         return $this->dao->getAllCourses();
     }
-    public function getCoursesById($id){
+    public function getCourseById($id){
         return $this->dao->getCoursesById($id);
     }
-    public function getCoursesByCode($id){
+    public function getCourseByCode($id){
         return $this->dao->getCoursesByCode($id);
     }
-    public function getCoursesByEcts($id){
+    public function getCourseByEcts($id){
         return $this->dao->getCoursesByEcts($id);
     }
     public function getPcByCourse($id){

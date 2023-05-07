@@ -27,16 +27,16 @@ Flight::route('GET /getAllCourses', function(){
     Flight::json(Flight::rmuService()->getAllCourses());
 });
 
-Flight::route('GET /getCoursesById/@id', function($id){
-    Flight::json(Flight::rmuService()->getCoursesById($id));
+Flight::route('GET /getCourseById/@id', function($id){
+    Flight::json(Flight::rmuService()->getCourseById($id));
 });
 
-Flight::route('GET /getCoursesByCode/@id', function($id){
-    Flight::json(Flight::rmuService()->getCoursesByCode($id));
+Flight::route('GET /getCourseByCode/@id', function($id){
+    Flight::json(Flight::rmuService()->getCourseByCode($id));
 });
 
-Flight::route('GET /getCoursesByEcts/@id', function($id){
-    Flight::json(Flight::rmuService()->getCoursesByEcts($id));
+Flight::route('GET /getCourseByEcts/@id', function($id){
+    Flight::json(Flight::rmuService()->getCourseByEcts($id));
 });
 
 Flight::route('GET /getPcByCourse/@id', function($id){
