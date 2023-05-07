@@ -8,25 +8,12 @@ class RMUService {
         $this->dao = new RMUDao();
     }
 
-    /** TODO
-    * Implement service method to return detailed cap-table
-    */
-    public function cap_table(){
-        return $this->dao->cap_table();
+    public function getAllUniversities(){
+        return $this->dao->getAllUniversities();
     }
 
-    /** TODO
-    * Implement service method to return cap-table summary
-    */
-    public function summary(){
-        return $this->dao->summary();
-    }
-
-    /** TODO
-    * Implement service method to return list of investors with their total shares amount
-    */
-    public function investors(){
-        return $this->dao->investors();
+    public function getUniversityById($id){
+        return $this->dao->getUniversityById($id);
     }
 }
 ?>
