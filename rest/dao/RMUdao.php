@@ -214,10 +214,17 @@ class RMUDao {
     // CREATE FUNCTIONS
 
     public function addUniversity($data){
-        $name = $data["name"];
-        $city = $data["city"];
-        $country = $data["country"];
-        $query = "INSERT INTO universities (name, city, country) VALUES ('$name', '$city', '$country');";
+        $query = "INSERT INTO universities (";
+        foreach ($data as $column => $value) {
+            $query.=$column.",";
+        }
+        $query = substr($query, 0, -1);
+        $query.=") VALUES (";
+        foreach ($data as $column => $value) {
+            $query.="'$value',";
+        }
+        $query = substr($query, 0, -1);
+        $query.=");";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $this->conn->lastInsertId();
