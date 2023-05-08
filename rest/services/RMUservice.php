@@ -78,9 +78,17 @@ class RMUService {
     public function getRatingByStudent($id){
         return $this->dao->getRatingByStudent($id);
     }
-    public function addUniversity($name, $city, $country){
-        return $this->dao->addUniversity($name, $city, $country);
+    public function addUniversity($data){
+        return $this->dao->addUniversity($data);
     }
-    
+    // ADD MORE ADD FUNCTIONS FOR INSERT STATEMENTS
+    public function updateUniversity($id, $data){
+        return $this->dao->updateUniversity($id, $data);
+    }
+    // ADD MORE UPDATE FUNCTIONS FOR UPDATE STATEMENTS
+    public function deleteUniversity($id){
+        return $this->dao->deleteUniversity($id);
+    }
+    // ADD MORE DELETE FUNCTIONS FOR DELETE STATEMENTS
 }
 ?>

@@ -100,4 +100,19 @@ Flight::route('POST /addUniversity', function() {
     Flight::json(Flight::rmuService()->addUniversity($data));
 });
 
+// ADD MORE POST REQUESTS FOR INSERT STATEMENTS
+
+Flight::route('PUT /updateUniversity/@id', function($id) {
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::rmuService()->updateUniversity($id, $data));
+});
+
+// ADD MORE PUT REQUESTS FOR UPDATE STATEMENTS
+
+Flight::route('DELETE /deleteUniversity/@id', function($id) {
+    Flight::rmuService()->deleteUniversity($id);
+});
+
+// ADD MORE DELETE REQUESTS FOR DELETE STATEMENTS
+
 ?>

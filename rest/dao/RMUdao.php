@@ -213,34 +213,35 @@ class RMUDao {
 
     // CREATE FUNCTIONS
 
-    public function addUniversity($name, $city, $country){
-        $query = "INSERT INTO universities (name, city, country) VALUES ($name, $city, $country)";
+    public function addUniversity($data){
+        $name = $data["name"];
+        $city = $data["city"];
+        $country = $data["country"];
+        $query = "INSERT INTO universities (name, city, country) VALUES ('$name', '$city', '$country');";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $this->conn->lastInsertId();
+    }
+    // ADD MORE INSERT STATEMENTS
+
+    public function updateUniversity($id, $data){
+        foreach ($data as $column => $value) {
+            $query = "UPDATE universities SET $column='$value' WHERE id='$id';";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+        }
+        return $this->getUniversityById($id);
     }
 
-    public function addCourse($code, $name, $ects){
-        $query = "INSERT INTO courses (code, name, ects) VALUES ($code, $name, $ects)";
+    // ADD MORE UPDATE STATEMENTS
+    
+    public function deleteUniversity($id){
+        $query = "DELETE FROM universities WHERE id=$id;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $this->conn->lastInsertId();
+        echo "\nDeleted $id successfully.";
     }
-    public function addUser($name, $email, $password, $isprofessor, $university_id){
-        $query = "INSERT INTO users (name, email, password, isprofessor, university_id) VALUES ($name, $email, $password, $isprofessor, $university_id)";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $this->conn->lastInsertId();
-    }
-    
-    public function addRating($user_id, $course_id, $rating, $ratedate){
-        $query = "INSERT INTO rating (user_id, course_id, rating, ratedate) VALUES ($user_id, $course_id, $rating, $ratedate)";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $this->conn->lastInsertId();
-    }
-    
-    
-    
+
+    // ADD MORE DELETE STATEMENTS
 }
 ?>
