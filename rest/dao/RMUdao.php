@@ -232,11 +232,14 @@ class RMUDao {
     // ADD MORE INSERT STATEMENTS
 
     public function updateUniversity($id, $data){
+        $query = "UPDATE universities SET ";
         foreach ($data as $column => $value) {
-            $query = "UPDATE universities SET $column='$value' WHERE id='$id';";
-            $stmt = $this->conn->prepare($query);
-            $stmt->execute();
+            $query.="$column='$value',"; 
         }
+        $query = substr($query, 0, -1);
+        $query.=" WHERE id=$id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
         return $this->getUniversityById($id);
     }
 
