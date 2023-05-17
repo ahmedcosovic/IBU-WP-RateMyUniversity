@@ -4,95 +4,107 @@ Flight::route('GET /api/connection-check', function(){
     Flight::rmuService();
 });
 
-Flight::route('GET /api/getAllUniversities', function(){
-    Flight::json(Flight::rmuService()->getAllUniversities());
+Flight::route('GET /api/getCourses', function(){
+    Flight::json(Flight::rmuService()->getCourses());
 });
 
-Flight::route('GET /api/getUniversityById/@id', function($id){
-    Flight::json(Flight::rmuService()->getUniversityById($id));
+Flight::route('GET /api/getCoursesByUniversity/@id', function($id){
+    Flight::json(Flight::rmuService()->getCoursesByUniversity($id));
 });
-Flight::route('GET /api/getUniversityByCity/@id', function($id){
-    Flight::json(Flight::rmuService()->getUniversityByCity($id));
-});
-
-Flight::route('GET /api/getUniversityByCountry/@id', function($id){
-    Flight::json(Flight::rmuService()->getUniversityByCountry($id));
-});
-
-Flight::route('GET /api/getUniversityByName/@id', function($id){
-    Flight::json(Flight::rmuService()->getUniversityByName($id));
-});
-
-Flight::route('GET /api/getAllCourses', function(){
-    Flight::json(Flight::rmuService()->getAllCourses());
-});
-
-Flight::route('GET /api/getCourseById/@id', function($id){
-    Flight::json(Flight::rmuService()->getCourseById($id));
-});
-
 Flight::route('GET /api/getCourseByCode/@id', function($id){
     Flight::json(Flight::rmuService()->getCourseByCode($id));
 });
 
-Flight::route('GET /api/getCourseByEcts/@id', function($id){
-    Flight::json(Flight::rmuService()->getCourseByEcts($id));
+Flight::route('GET /api/getCoursesByEcts/@id', function($id){
+    Flight::json(Flight::rmuService()->getCoursesByEcts($id));
 });
 
-Flight::route('GET /api/getPcByCourse/@id', function($id){
-    Flight::json(Flight::rmuService()->getPcByCourse($id));
+Flight::route('GET /api/searchCourse/@id', function($id){
+    Flight::json(Flight::rmuService()->searchCourse($id));
 });
 
-Flight::route('GET /api/getPcByProfessor/@id', function($id){
-    Flight::json(Flight::rmuService()->getPcByProfessor($id));
+Flight::route('GET /api/getUniversities', function(){
+    Flight::json(Flight::rmuService()->getUniversities());
 });
 
-Flight::route('GET /api/getAllUsers', function(){
-    Flight::json(Flight::rmuService()->getAllUsers());
+Flight::route('GET /api/searchUniversities/@id', function($id){
+    Flight::json(Flight::rmuService()->searchUniversities($id));
 });
 
-Flight::route('GET /api/getAllProfessors', function(){
-    Flight::json(Flight::rmuService()->getAllProfessors());
+Flight::route('GET /api/searchUniversitiesByCity/@id', function($id){
+    Flight::json(Flight::rmuService()->searchUniversitiesByCity($id));
 });
 
-Flight::route('GET /api/getAllStudents', function(){
-    Flight::json(Flight::rmuService()->getAllStudents());
+Flight::route('GET /api/searchUniversitiesByCountry/@id', function($id){
+    Flight::json(Flight::rmuService()->searchUniversitiesByCountry($id));
 });
 
-Flight::route('GET /api/getUserById/@id', function($id){
-    Flight::json(Flight::rmuService()->getUserById($id));
+Flight::route('GET /api/listCountries', function(){
+    Flight::json(Flight::rmuService()->listCountries());
 });
 
-Flight::route('GET /api/getStudentByUniversity/@id', function($id){
-    Flight::json(Flight::rmuService()->getStudentByUniversity($id));
+Flight::route('GET /api/listCities', function(){
+    Flight::json(Flight::rmuService()->listCities());
 });
 
-Flight::route('GET /api/getProfessorByUniversity/@id', function($id){
-    Flight::json(Flight::rmuService()->getProfessorByUniversity($id));
+Flight::route('GET /api/getUsers', function(){
+    Flight::json(Flight::rmuService()->getUsers());
 });
 
-Flight::route('GET /api/getAllRatings', function(){
-    Flight::json(Flight::rmuService()->getAllRatings());
+Flight::route('GET /api/getProfessors', function(){
+    Flight::json(Flight::rmuService()->getProfessors());
 });
 
-Flight::route('GET /api/getRatingByDate/@id', function($id){
-    Flight::json(Flight::rmuService()->getRatingByDate($id));
+Flight::route('GET /api/getStudents', function(){
+    Flight::json(Flight::rmuService()->getStudents());
 });
 
-Flight::route('GET /api/getAllAnonymousRatings', function(){
-    Flight::json(Flight::rmuService()->getAllAnonymousRatings());
+Flight::route('GET /api/searchUsers/@id', function($id){
+    Flight::json(Flight::rmuService()->searchUsers($id));
 });
 
-Flight::route('GET /api/getAllNonAnonymousRatings', function(){
-    Flight::json(Flight::rmuService()->getAllNonAnonymousRatings());
+Flight::route('GET /api/searchUsername/@id', function($id){
+    Flight::json(Flight::rmuService()->searchUsername($id));
 });
 
-Flight::route('GET /api/getRatingByProfessor/@id', function($id){
-    Flight::json(Flight::rmuService()->getRatingByProfessor($id));
+Flight::route('GET /api/searchUsersByUniversity/@id', function($id){
+    Flight::json(Flight::rmuService()->searchUsersByUniversity($id));
 });
 
-Flight::route('GET /api/getRatingByStudent/@id', function($id){
-    Flight::json(Flight::rmuService()->getRatingByStudent($id));
+Flight::route('GET /api/listUsers', function(){
+    Flight::json(Flight::rmuService()->listUsers());
+});
+
+Flight::route('GET /api/listProfessors', function(){
+    Flight::json(Flight::rmuService()->listProfessors());
+});
+
+Flight::route('GET /api/listStudents', function(){
+    Flight::json(Flight::rmuService()->listStudents());
+});
+
+Flight::route('GET /api/getStudentCourses', function(){
+    Flight::json(Flight::rmuService()->getStudentCourses());
+});
+
+Flight::route('GET /api/getProfessorCourses', function(){
+    Flight::json(Flight::rmuService()->getProfessorCourses());
+});
+
+Flight::route('GET /api/getCourseProfessors', function(){
+    Flight::json(Flight::rmuService()->getCourseProfessors());
+});
+
+Flight::route('GET /api/getCourseStudents', function(){
+    Flight::json(Flight::rmuService()->getCourseStudents());
+});
+
+Flight::route('GET /api/getPublicRatings', function(){
+    Flight::json(Flight::rmuService()->getPublicRatings());
+});
+
+Flight::route('GET /api/getPrivateRatings', function(){
+    Flight::json(Flight::rmuService()->getPrivateRatings());
 });
 
 Flight::route('POST /api/addUniversity', function() {
@@ -100,19 +112,68 @@ Flight::route('POST /api/addUniversity', function() {
     Flight::json(Flight::rmuService()->addUniversity($data));
 });
 
-// ADD MORE POST REQUESTS FOR INSERT STATEMENTS
+Flight::route('POST /api/addCourse', function() {
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::rmuService()->addCourse($data));
+});
+
+Flight::route('POST /api/addUser', function() {
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::rmuService()->addUser($data));
+});
+
+Flight::route('POST /api/addUserCourse', function() {
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::rmuService()->addUserCourse($data));
+});
+
+Flight::route('POST /api/addRating', function() {
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::rmuService()->addRating($data));
+});
 
 Flight::route('PUT /api/updateUniversity/@id', function($id) {
     $data = Flight::request()->data->getData();
     Flight::json(Flight::rmuService()->updateUniversity($id, $data));
 });
 
-// ADD MORE PUT REQUESTS FOR UPDATE STATEMENTS
+Flight::route('PUT /api/updateCourse/@id', function($id) {
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::rmuService()->updateCourse($id, $data));
+});
+
+Flight::route('PUT /api/updateUserCourse/@id', function($id) {
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::rmuService()->updateUserCourse($id, $data));
+});
+
+Flight::route('PUT /api/updateRating/@id', function($id) {
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::rmuService()->updateRating($id, $data));
+});
+
+Flight::route('PUT /api/updateUser/@id', function($id) {
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::rmuService()->updateUser($id, $data));
+});
 
 Flight::route('DELETE /api/deleteUniversity/@id', function($id) {
     Flight::rmuService()->deleteUniversity($id);
 });
 
-// ADD MORE DELETE REQUESTS FOR DELETE STATEMENTS
+Flight::route('DELETE /api/deleteCourse/@id', function($id) {
+    Flight::rmuService()->deleteCourse($id);
+});
 
+Flight::route('DELETE /api/deleteUserCourse/@id', function($id) {
+    Flight::rmuService()->deleteUserCourse($id);
+});
+
+Flight::route('DELETE /api/deleteRating/@id', function($id) {
+    Flight::rmuService()->deleteRating($id);
+});
+
+Flight::route('DELETE /api/deleteUser/@id', function($id) {
+    Flight::rmuService()->deleteUser($id);
+});
 ?>
