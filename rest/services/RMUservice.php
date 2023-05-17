@@ -3,80 +3,134 @@ require_once __DIR__."/../dao/RMUdao.php";
 
 class RMUService {
     protected $dao;
-
     public function __construct(){
         $this->dao = new RMUDao();
     }
-
-    public function getAllUniversities(){
-        return $this->dao->getAllUniversities();
+    public function getCourses(){
+        return $this->dao->getCourses();
     }
-
-    public function getUniversityById($id){
-        return $this->dao->getUniversityById($id);
-    }
-    public function getUniversityByCity($id){
-        return $this->dao->getUniversityByCity($id);
-    }
-    public function getUniversityByCountry($id){
-        return $this->dao->getUniversityByCountry($id);
-    }
-    public function getUniversityByName($id){
-        return $this->dao->getUniversityByName($id);
-    }
-    public function getAllCourses(){
-        return $this->dao->getAllCourses();
-    }
-    public function getCourseById($id){
-        return $this->dao->getCourseById($id);
+    public function getCoursesByUniversity($id){
+        return $this->dao->getCoursesByUniversity($id);
     }
     public function getCourseByCode($id){
         return $this->dao->getCourseByCode($id);
     }
-    public function getCourseByEcts($id){
-        return $this->dao->getCourseByEcts($id);
+    public function getCoursesByEcts($id){
+        return $this->dao->getCoursesByEcts($id);
     }
-    public function getPcByCourse($id){
-        return $this->dao->getPcByCourse($id);
+    public function searchCourse($id){
+        return $this->dao->searchCourse($id);
     }
-    public function getPcByProfessor($id){
-        return $this->dao->getPcByProfessor($id);
+    public function getUniversities(){
+        return $this->dao->getUniversities();
     }
-    public function getAllUsers(){
-        return $this->dao->getAllUsers();
+    public function searchUniversities($id){
+        return $this->dao->searchUniversities($id);
     }
-    public function getAllProfessors(){
-        return $this->dao->getAllProfessors();
+    public function searchUniversitiesByCity($id){
+        return $this->dao->searchUniversitiesByCity($id);
     }
-    public function getAllStudents(){
-        return $this->dao->getAllStudents();
+    public function searchUniversitiesByCountry($id){
+        return $this->dao->searchUniversitiesByCountry($id);
     }
-    public function getUserById($id){
-        return $this->dao->getUserById($id);
+    public function listCountries(){
+        return $this->dao->listCountries();
     }
-    public function getStudentByUniversity($id){
-        return $this->dao->getStudentByUniversity($id);
+    public function listCities(){
+        return $this->dao->listCities();
     }
-    public function getProfessorByUniversity($id){
-        return $this->dao->getProfessorByUniversity($id);
+    public function getUsers(){
+        return $this->dao->getUsers();
     }
-    public function getAllRatings(){
-        return $this->dao->getAllRatings();
+    public function getProfessors(){
+        return $this->dao->getProfessors();
     }
-    public function getRatingByDate($id){
-        return $this->dao->getRatingByDate($id);
+    public function getStudents(){
+        return $this->dao->getStudents();
     }
-    public function getAllAnonymousRatings(){
-        return $this->dao->getAllAnonymousRatings();
+    public function searchUsers($id){
+        return $this->dao->searchUsers($id);
     }
-    public function getAllNonAnonymousRatings(){
-        return $this->dao->getAllNonAnonymousRatings();
+    public function searchUsername($id){
+        return $this->dao->searchUsername($id);
     }
-    public function getRatingByProfessor($id){
-        return $this->dao->getRatingByProfessor($id);
-    }public function getRatingByStudent($id){
-        return $this->dao->getRatingByStudent($id);
+    public function searchUsersByUniversity($id){
+        return $this->dao->searchUsersByUniversity($id);
     }
-    
+    public function getStudentById($id){
+        return $this->dao->getStudentById($id);
+    }
+    public function listUsers(){
+        return $this->dao->listUsers();
+    }
+    public function listProfessors(){
+        return $this->dao->listProfessors();
+    }
+    public function listStudents(){
+        return $this->dao->listStudents();
+    }
+    public function getStudentCourses(){
+        return $this->dao->getStudentCourses();
+    }
+    public function getProfessorCourses(){
+        return $this->dao->getProfessorCourses();
+    }
+    public function getCourseProfessors(){
+        return $this->dao->getCourseProfessors();
+    }
+    public function getCourseStudents(){
+        return $this->dao->getCourseStudents();
+    }
+    public function getPublicRatings(){
+        return $this->dao->getPublicRatings();
+    }
+    public function getPrivateRatings(){
+        return $this->dao->getPrivateRatings();
+    }
+    public function addUniversity($data){
+        return $this->dao->addUniversity($data);
+    }
+    public function addCourse($data){
+        return $this->dao->addCourse($data);
+    }
+    public function addUser($data){
+        return $this->dao->addUser($data);
+    }
+    public function addUserCourse($data){
+        return $this->dao->addUserCourse($data);
+    }
+    public function addRating($data){
+        return $this->dao->addRating($data);
+    }
+    public function updateUniversity($id, $data){
+        return $this->dao->updateUniversity($id, $data);
+    }
+    public function updateCourse($id, $data){
+        return $this->dao->updateCourse($id, $data);
+    }
+    public function updateUserCourse($id, $data){
+        return $this->dao->updateUserCourse($id, $data);
+    }
+    public function updateRating($id, $data){
+        return $this->dao->updateRating($id, $data);
+    }
+    public function updateUser($id, $data){
+        return $this->dao->updateUser($id, $data);
+    }
+    public function deleteUniversity($id){
+        return $this->dao->deleteUniversity($id);
+    }
+    public function deleteCourse($id){
+        return $this->dao->deleteCourse($id);
+    }
+    public function deleteUserCourse($id){
+        return $this->dao->deleteUserCourse($id);
+    }
+    public function deleteUser($id){
+        return $this->dao->deleteUser($id);
+    }
+    public function deleteRating($id){
+        return $this->dao->deleteRating($id);
+    }
 }
 ?>

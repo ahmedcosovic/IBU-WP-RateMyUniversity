@@ -7,11 +7,11 @@ class RMUDao {
     public function __construct(){
         try {
 
-        $servername = "sql7.freemysqlhosting.net";
+        $servername = "localhost";
         $serverport = "3306";
-        $username = "sql7610511";
-        $password = "eHCwFhXnpw";
-        $schema = "sql7610511";
+        $username = "root";
+        $password = "";
+        $schema = "rmu";
 
         /*options array neccessary to enable ssl mode - do not change*/
         /*$options = array(
@@ -28,56 +28,16 @@ class RMUDao {
         }
     }
 
-    public function getAllUniversities(){
-        $query = "SELECT * FROM universities;";
+    public function getCourses(){
+        $query = "select * from courses;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getUniversityById($id){
-        $query = "SELECT * FROM universities WHERE id=$id";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
-
-    public function getUniversityByCity($city){
-        $query = "SELECT * FROM universities WHERE city='$city' ";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
-
-    public function getUniversityByCountry($country){
-        $query = "SELECT * FROM universities WHERE country='$country' ";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
-
-    public function getUniversityByName($uname){
-        $query = "SELECT * FROM universities WHERE name='$uname' ";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
-
-    public function getAllCourses(){
-        $query = "SELECT * FROM courses ";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
-
-    public function getCourseById($cid){
-        $query = "SELECT * FROM courses WHERE id=$cid ";
+    public function getCoursesByUniversity($id){
+        $query = "select * from courses where uid=$id;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -85,130 +45,370 @@ class RMUDao {
     }
 
     public function getCourseByCode($code){
-        $query = "SELECT * FROM courses WHERE code='$code' ";
+        $query = "select * from courses where LOWER(code)=LOWER('$code');";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getCourseByEcts($ects){
-        $query = "SELECT * FROM courses WHERE ects=$ects ";
+    public function getCoursesByEcts($ects){
+        $query = "select * from courses where ects=$ects";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getPcByCourse($cid){
-        $query = "SELECT * FROM professorcourses WHERE course_id=$cid ";
+    public function searchCourse($search){
+        $query = "select * from courses where LOWER(name) like LOWER('%$search%');";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getPcByProfessor($profid){
-        $query = "SELECT * FROM professorcourses WHERE professor_id=$profid ";
+    public function getUniversities(){
+        $query = "select * from universities;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getAllUsers(){
-        $query = "SELECT * FROM users";
+    public function searchUniversities($search){
+        $query = "select * from universities where LOWER(name) like LOWER('%$search%');";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getAllProfessors(){
-        $query = "SELECT * FROM users WHERE isprofessor=1 ";
+    public function searchUniversitiesByCity($city){
+        $query = "select * from universities where LOWER(city)=LOWER('$city');";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getAllStudents(){
-        $query = "SELECT * FROM users WHERE isprofessor=0 ";
+    public function searchUniversitiesByCountry($country){
+        $query = "select * from universities where LOWER(country)=LOWER('$country');";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getUserById($uid){
-        $query = "SELECT * FROM users WHERE id=$uid ";
+    public function listCountries(){
+        $query = "select country from universities group by country;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getStudentByUniversity($univid){
-        $query = "SELECT * FROM users WHERE university_id=$univid AND isprofessor=0 ";
+    public function listCities(){
+        $query = "select city from universities group by city;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getProfessorByUniversity($univid){
-        $query = "SELECT * FROM users WHERE university_id=$univid AND isprofessor=1 ";
+    public function getUsers(){
+        $query = "select * from users;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getAllRatings(){
-        $query = "SELECT * FROM rating ";
+    public function getProfessors(){
+        $query = "select * from users where professor=1;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getRatingByDate($rdate){
-        $query = "SELECT * FROM rating WHERE ratedate=$rdate";
+    public function getStudents(){
+        $query = "select * from users where professor=0;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getAllAnonymousRatings(){
-        $query = "SELECT * FROM rating WHERE anonymous=1";
+    public function searchUsers($search){
+        $query = "select * from users where LOWER(fullname) like LOWER('%$search%');";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getAllNonAnonymousRatings(){
-        $query = "SELECT * FROM rating WHERE anonymous=0";
+    public function searchUsername($username){
+        $query = "select * from users where LOWER(username)=LOWER('$username');";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getRatingByProfessor($pid){
-        $query = "SELECT * FROM rating r JOIN professorcourses pc ON r.pc_id=pc.id   WHERE pc.professor_id=$pid";
+    public function searchUsersByUniversity($id){
+        $query = "select * from users where uid=$id;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
-    public function getRatingByStudent($sid){
-        $query = "SELECT * FROM rating WHERE student_id=$sid";
+
+    public function getStudentById($stuid){
+        $query = "select * from users where stuid=$stuid;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+    }
+
+    public function listUsers(){
+        $query = "select concat(concat(username,' - '),fullname) as user from users;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function listProfessors(){
+        $query = "select concat(concat(username,' - '),fullname) as user from users where professor=1;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function listStudents(){
+        $query = "select concat(concat(username,' - '),fullname) as user from users where professor=0;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getStudentCourses(){
+        $query = "select u.id as userid, concat(concat(u.username, ' - '),u.fullname) as student, group_concat(c.id) as courseid, group_concat(c.name) as course from user_courses uc join users u on u.id=uc.uid join courses c on c.id=uc.cid where u.professor=0 group by u.id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getProfessorCourses(){
+        $query = "select u.id as userid, concat(concat(u.username, ' - '),u.fullname) as student, group_concat(c.id) as courseid, group_concat(c.name) as course from user_courses uc join users u on u.id=uc.uid join courses c on c.id=uc.cid where u.professor=1 group by u.id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getCourseProfessors(){
+        $query = "select c.id as courseid, c.name as course, group_concat(u.id) as userid, group_concat(concat(concat(u.username, ' - '),u.fullname)) as student from user_courses uc join users u on u.id=uc.uid join courses c on c.id=uc.cid where u.professor=1 group by c.id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getCourseStudents(){
+        $query = "select c.id as courseid, c.name as course, group_concat(u.id) as userid, group_concat(concat(concat(u.username, ' - '),u.fullname)) as student from user_courses uc join users u on u.id=uc.uid join courses c on c.id=uc.cid where u.professor=0 group by c.id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getPublicRatings(){
+        $query = "select r.id, r.pscore, r.cscore, r.datetime, r.comment, u.fullname as 'student', c.code, c.name, tabela2.x as 'professors', tabela2.y as 'professorIds' from rating r join user_courses uc on uc.id=r.pc_id join users u on u.id=r.sid join courses c on c.id=uc.cid join (select GROUP_CONCAT(u2.fullname) as x, GROUP_CONCAT(u2.id) as y, uc2.cid from users u2 join user_courses uc2 on u2.id=uc2.uid where u2.professor=1 group by uc2.cid) as tabela2 on tabela2.cid=c.id where r.anonymous=0;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getPrivateRatings(){
+        $query = "select r.id, r.pscore, r.cscore, r.datetime, r.comment, c.code, c.name, tabela2.x as 'professors', tabela2.y as 'professorIds' from rating r join user_courses uc on uc.id=r.pc_id join users u on u.id=r.sid join courses c on c.id=uc.cid join (select GROUP_CONCAT(u2.fullname) as x, GROUP_CONCAT(u2.id) as y, uc2.cid from users u2 join user_courses uc2 on u2.id=uc2.uid where u2.professor=1 group by uc2.cid) as tabela2 on tabela2.cid=c.id where r.anonymous=1;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function addUniversity($data){
+        $query = "INSERT INTO universities (";
+        foreach ($data as $column => $value) {
+            $query.=$column.",";
+        }
+        $query = substr($query, 0, -1);
+        $query.=") VALUES (";
+        foreach ($data as $column => $value) {
+            $query.="'$value',";
+        }
+        $query = substr($query, 0, -1);
+        $query.=");";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $this->conn->lastInsertId();
+    }
+
+    public function addCourse($data){
+        $query = "INSERT INTO courses (";
+        foreach ($data as $column => $value) {
+            $query.=$column.",";
+        }
+        $query = substr($query, 0, -1);
+        $query.=") VALUES (";
+        foreach ($data as $column => $value) {
+            $query.="'$value',";
+        }
+        $query = substr($query, 0, -1);
+        $query.=");";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $this->conn->lastInsertId();
+    }
+    public function addUser($data){
+        $query = "INSERT INTO users (";
+        foreach ($data as $column => $value) {
+            $query.=$column.",";
+        }
+        $query = substr($query, 0, -1);
+        $query.=") VALUES (";
+        foreach ($data as $column => $value) {
+            $query.="'$value',";
+        }
+        $query = substr($query, 0, -1);
+        $query.=");";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $this->conn->lastInsertId();
+    }
+    public function addUserCourse($data){
+        $query = "INSERT INTO user_courses (";
+        foreach ($data as $column => $value) {
+            $query.=$column.",";
+        }
+        $query = substr($query, 0, -1);
+        $query.=") VALUES (";
+        foreach ($data as $column => $value) {
+            $query.="'$value',";
+        }
+        $query = substr($query, 0, -1);
+        $query.=");";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $this->conn->lastInsertId();
+    }
+    public function addRating($data){
+        $query = "INSERT INTO rating (";
+        foreach ($data as $column => $value) {
+            $query.=$column.",";
+        }
+        $query = substr($query, 0, -1);
+        $query.=") VALUES (";
+        foreach ($data as $column => $value) {
+            $query.="'$value',";
+        }
+        $query = substr($query, 0, -1);
+        $query.=");";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $this->conn->lastInsertId();
+    }
+
+    public function updateUniversity($id, $data){
+        $query = "UPDATE universities SET ";
+        foreach ($data as $column => $value) {
+            $query.="$column='$value',"; 
+        }
+        $query = substr($query, 0, -1);
+        $query.=" WHERE id=$id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $this->getUniversityById($id);
+    }
+
+    public function updateCourse($id, $data){
+        $query = "UPDATE courses SET ";
+        foreach ($data as $column => $value) {
+            $query.="$column='$value',"; 
+        }
+        $query = substr($query, 0, -1);
+        $query.=" WHERE id=$id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $this->getUniversityById($id);
+    }
+
+    public function updateUserCourse($id, $data){
+        $query = "UPDATE user_courses SET ";
+        foreach ($data as $column => $value) {
+            $query.="$column='$value',"; 
+        }
+        $query = substr($query, 0, -1);
+        $query.=" WHERE id=$id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $this->getUniversityById($id);
+    }
+
+    public function updateRating($id, $data){
+        $query = "UPDATE rating SET ";
+        foreach ($data as $column => $value) {
+            $query.="$column='$value',"; 
+        }
+        $query = substr($query, 0, -1);
+        $query.=" WHERE id=$id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $this->getUniversityById($id);
+    }
+
+    public function updateUser($id, $data){
+        $query = "UPDATE users SET ";
+        foreach ($data as $column => $value) {
+            $query.="$column='$value',"; 
+        }
+        $query = substr($query, 0, -1);
+        $query.=" WHERE id=$id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $this->getUniversityById($id);
+    }
+    
+    public function deleteUniversity($id){
+        $query = "DELETE FROM universities WHERE id=$id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        echo "\nDeleted $id successfully.";
+    }
+    public function deleteCourse($id){
+        $query = "DELETE FROM courses WHERE id=$id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        echo "\nDeleted $id successfully.";
+    }
+    public function deleteUserCourse($id){
+        $query = "DELETE FROM user_courses WHERE id=$id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        echo "\nDeleted $id successfully.";
+    }
+    public function deleteRating($id){
+        $query = "DELETE FROM rating WHERE id=$id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        echo "\nDeleted $id successfully.";
+    }
+    public function deleteUser($id){
+        $query = "DELETE FROM users WHERE id=$id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        echo "\nDeleted $id successfully.";
     }
 }
 ?>
