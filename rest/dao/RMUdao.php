@@ -10,7 +10,7 @@ class RMUDao {
         $servername = "localhost";
         $serverport = "3306";
         $username = "root";
-        $password = "";
+        $password = "root";
         $schema = "rmu";
 
         /*options array neccessary to enable ssl mode - do not change*/

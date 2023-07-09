@@ -355,7 +355,7 @@ Flight::route('POST /login', function(){
         Flight::json(["message" => "User doesn't exist"], 404);
     }
 });
-
+// Middleware
 Flight::route('/api/*', function () {
     $header = Flight::header("Authorization");
     if (!$header) {

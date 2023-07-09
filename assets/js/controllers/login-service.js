@@ -33,11 +33,29 @@ var LoginService = {
       var token = localStorage.getItem("user_token");
       if (token) {
           var user = Utils.parseJwt(token);
-          if (user.is_admin) {
-              $("#users-link").removeClass("hide");
+          if (user.admin) {
+              $("#navigation5").removeClass("hide");
+          }
+          if (user.professor) {
+            $("#navigation4").removeClass("forProfessors");
+          } else {
+            $("#navigation1").removeClass("forStudents");
+            $("#navigation2").removeClass("forStudents");
+            $("#navigation3").removeClass("forStudents");
           }
       } else {
           window.location.href = "login.html";
       }
+    },
+
+    getLoggedUser: function() {
+      var token = localStorage.getItem("user_token");
+      if (token) {
+        var user = Utils.parseJwt(token);
+        return user.fullname;
+      }
+      else {
+        return null;
     }
-  };
+    }
+  }

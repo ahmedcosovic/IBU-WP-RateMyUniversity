@@ -29,3 +29,15 @@ body {
     background-color: #555;
     color: white;
   }
+
+  .hide {
+    display: none !important;
+  }
+
+  .forStudents {
+    display: none !important;
+  }
+
+  .forProfessors {
+    display: none !important;
+  }
