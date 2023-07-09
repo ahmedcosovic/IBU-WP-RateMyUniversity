@@ -216,6 +216,13 @@ class RMUDao {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    public function getCourseProfessorsByCid($cid){
+        $query = "select c.id as courseid, c.name as course, u.id as profid, u.fullname from user_courses uc join users u on u.id=uc.uid join courses c on c.id=uc.cid where u.professor=1 and c.id=$cid;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     public function getCourseStudents(){
         $query = "select c.id as courseid, c.name as course, group_concat(u.id) as userid, group_concat(concat(concat(u.username, ' - '),u.fullname)) as student from user_courses uc join users u on u.id=uc.uid join courses c on c.id=uc.cid where u.professor=0 group by c.id;";
         $stmt = $this->conn->prepare($query);

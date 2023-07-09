@@ -194,6 +194,9 @@ Flight::route('GET /api/getProfessorCourses', function(){
 Flight::route('GET /api/getCourseProfessors', function(){
     Flight::json(Flight::rmuService()->getCourseProfessors());
 });
+Flight::route('GET /api/getCourseProfessorsByCid/@cid', function($cid){
+    Flight::json(Flight::rmuService()->getCourseProfessorsByCid($cid));
+});
 /**
  * @OA\Get(path="/getCourseStudents", tags={"courses"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return all course students from the API. ",

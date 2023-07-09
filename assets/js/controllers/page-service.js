@@ -19,7 +19,44 @@ var PageService = {
         $('#a7').removeClass('active');
     },
     ratemyprofessor: function() {
-        let popuniti = ``;
+        let popuniti = `<form action="/action_page.php"><br>
+    
+        <label for="course">Select course:</label>
+        <select id="course" name="course" onchange="popuniProf()">
+            <option value="default" selected disabled>Please select</option>
+        </select>
+
+        <label for="professor">Select professor:</label>
+        <select id="professor" name="professor">
+
+        </select>
+
+        <label for="ratecourse">Rate course:</label>
+        <select id="ratecourse" name="ratecourse">
+          <option value="c1">1</option>
+          <option value="c2">2</option>
+          <option value="c3">3</option>
+          <option value="c4">4</option>
+          <option value="c5">5</option>
+        </select>
+
+        <label for="rateprofessor">Rate professor:</label>
+        <select id="rateprofessor" name="rateprofessor">
+          <option value="p1">1</option>
+          <option value="p2">2</option>
+          <option value="p3">3</option>
+          <option value="p4">4</option>
+          <option value="p5">5</option>
+        </select>
+
+        <label for="notes">Rate professor:</label><br>
+        <textarea id="notes" name="notes" rows="10" cols="50" placeholder="Please leave your review here, submissions without a review won't be acknowledged!"></textarea><br>
+
+        <label for="anonymous">Send anonymously:</label>
+        <input type="checkbox" id="anonymous" name="anonymous">
+      
+        <input type="submit" value="Submit">
+      </form>`;
         $('#popunjavanje').empty();
         $('#popunjavanje').append(popuniti);
         $('#a1').removeClass('active');
@@ -29,18 +66,7 @@ var PageService = {
         $('#a5').removeClass('active');
         $('#a6').removeClass('active');
         $('#a7').removeClass('active');
-    },
-    ratemycourse: function() {
-        let popuniti = ``;
-        $('#popunjavanje').empty();
-        $('#popunjavanje').append(popuniti);
-        $('#a1').removeClass('active');
-        $('#a2').removeClass('active');
-        $('#a3').addClass('active');
-        $('#a4').removeClass('active');
-        $('#a5').removeClass('active');
-        $('#a6').removeClass('active');
-        $('#a7').removeClass('active');
+        popuniCourse();
     },
     viewratinghistory: function() {
         let popuniti = ``;
@@ -78,4 +104,5 @@ var PageService = {
         $('#a6').addClass('active');
         $('#a7').removeClass('active');
     }
+    
 }

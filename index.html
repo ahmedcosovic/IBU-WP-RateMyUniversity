@@ -10,7 +10,6 @@
         <ul>
             <li onClick="PageService.home()"><a class="active" href="#home" id="a1">Home</a></li>
             <li class="forStudents" id="navigation1" onClick="PageService.ratemyprofessor()"><a href="#ratemyprofessor" id="a2">Rate my professor</a></li>
-            <li class="forStudents" id="navigation2" onClick="PageService.ratemycourse()"><a href="#ratemycourse" id="a3">Rate my course</a></li>
             <li class="forStudents" id="navigation3" onClick="PageService.viewratinghistory()"><a href="#viewratinghistory" id="a4">View rating history</a></li>
             <li class="forProfessors" id="navigation4" onClick="PageService.viewmyratings()"><a href="#viewmyratings" id="a5">View my ratings</a></li>
             <li class="hide" id="navigation5" onClick="PageService.admin()"><a href="#admin" id="a6">Admin</a></li>
@@ -18,6 +17,7 @@
           </ul>
           
           <div style="margin-left:25%;padding:1px 16px;height:1000px;" id="popunjavanje">
+            
           </div>
     </body>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
@@ -35,5 +35,47 @@
         var loggedUser = LoginService.getLoggedUser();
         PageService.home();
         document.getElementById("usershow").innerHTML = "Hello " + loggedUser + "!";
+        function popuniProf() {
+        var $id = parseInt($('#course').find(":selected").val());
+        $.ajax({
+          url: "rest/api/getCourseProfessorsByCid/" + $id,
+          type: "get",
+          success: function (data) {
+            console.log("data[0]");
+            var html = "";
+            for (let i = 0; i < data.length; i++) {
+              html +=
+                `<option value="` +
+                data[i].profid +
+                `">` +
+                data[i].fullname +
+                `</option>`;
+            }
+            $("#professor").html(html);
+          },
+        });
+      }
+        function popuniCourse() {
+        $.ajax({
+          url: "rest/api/getCourses",
+          type: "get",
+          success: function (data) {
+            console.log("data[0]");
+            var html = "";
+            for (let i = 0; i < data.length; i++) {
+              html +=
+                `<option value="` +
+                data[i].id +
+                `">` +
+                data[i].code +
+                ` - ` +
+                data[i].name +
+                `</option>`;
+            }
+            $("#course").append(html);
+          },
+        });
+        popuniProf();
+      }
     </script>
 </html>
