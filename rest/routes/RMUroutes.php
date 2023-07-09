@@ -1,5 +1,8 @@
 <?php
 
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
 Flight::route('GET /api/connection-check', function(){
     Flight::rmuService();
 });
@@ -176,4 +179,23 @@ Flight::route('DELETE /api/deleteRating/@id', function($id) {
 Flight::route('DELETE /api/deleteUser/@id', function($id) {
     Flight::rmuService()->deleteUser($id);
 });
+
+Flight::route('POST /api/login', function(){
+    $login = Flight::request()->data->getData();
+    $uJsonu = Flight::rmuService()->searchUsername($login['username']);
+    $user = $uJsonu[0];
+    // Flight::json(["KLJUCEVI SU" => $login['password']], 403);
+    if (!empty($user['id'])){
+      if($user['password'] == $login['password']){
+        unset($user['password']);
+        $jwt = JWT::encode($user, Config::JWT_SECRET(), 'HS256');
+        Flight::json(['token' => $jwt]);
+      } else {
+        Flight::json(["message" => "Wrong password"], 403);
+      }
+    } else {
+        Flight::json(["message" => "User doesn't exist"], 404);
+    }
+});
+
 ?>
