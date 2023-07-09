@@ -15,7 +15,7 @@ var LoginService = {
   
     login: function (entity) {
       RestClient.post(
-        "rest/api/login",
+        "rest/login",
         entity,
         function (result) {
           localStorage.setItem("user_token", result.token);

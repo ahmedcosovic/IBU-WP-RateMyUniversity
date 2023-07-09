@@ -338,7 +338,7 @@ Flight::route('DELETE /api/deleteUser/@id', function($id) {
     Flight::rmuService()->deleteUser($id);
 });
 
-Flight::route('POST /api/login', function(){
+Flight::route('POST /login', function(){
     $login = Flight::request()->data->getData();
     $uJsonu = Flight::rmuService()->searchUsername($login['username']);
     $user = $uJsonu[0];
@@ -355,5 +355,22 @@ Flight::route('POST /api/login', function(){
         Flight::json(["message" => "User doesn't exist"], 404);
     }
 });
+
+Flight::route('/api/*', function () {
+    $header = Flight::header("Authorization");
+    if (!$header) {
+      Flight::json(["message" => "Authorization is missing"], 403);
+      return FALSE;
+    }else{
+        try {
+          $decoded = (array)JWT::decode($header, new Key(Config::JWT_SECRET(), 'HS256'));
+          Flight::set('user', $decoded);
+          return TRUE;
+        } catch (\Exception $e) {
+          Flight::json(["message" => "Authorization token is not valid"], 403);
+          return FALSE;
+        }
+    }
+  });
 
 ?>
