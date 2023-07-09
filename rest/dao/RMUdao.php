@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '/../config.php';
 class RMUDao {
 
     private $conn;
@@ -329,7 +329,7 @@ class RMUDao {
         $query.=" WHERE id=$id;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $this->getUniversityById($id);
+        return $this->searchUniversities($id);
     }
 
     public function updateCourse($id, $data){
@@ -341,7 +341,7 @@ class RMUDao {
         $query.=" WHERE id=$id;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $this->getUniversityById($id);
+        return $this->searchUniversities($id);
     }
 
     public function updateUserCourse($id, $data){
@@ -353,7 +353,7 @@ class RMUDao {
         $query.=" WHERE id=$id;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $this->getUniversityById($id);
+        return $this->searchUniversities($id);
     }
 
     public function updateRating($id, $data){
@@ -365,7 +365,7 @@ class RMUDao {
         $query.=" WHERE id=$id;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $this->getUniversityById($id);
+        return $this->searchUniversities($id);
     }
 
     public function updateUser($id, $data){
@@ -377,7 +377,7 @@ class RMUDao {
         $query.=" WHERE id=$id;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $this->getUniversityById($id);
+        return $this->searchUniversities($id);
     }
     
     public function deleteUniversity($id){
