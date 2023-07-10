@@ -10,7 +10,7 @@ class RMUDao {
         $servername = "localhost";
         $serverport = "3306";
         $username = "root";
-        $password = "root";
+        $password = "";
         $schema = "rmu";
 
         /*options array neccessary to enable ssl mode - do not change*/
@@ -204,6 +204,13 @@ class RMUDao {
     }
     public function getProfessorCourses(){
         $query = "select u.id as userid, concat(concat(u.username, ' - '),u.fullname) as student, group_concat(c.id) as courseid, group_concat(c.name) as course from user_courses uc join users u on u.id=uc.uid join courses c on c.id=uc.cid where u.professor=1 group by u.id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getProfessorCoursesIds($pid,$cid){
+        $query = "select * from user_courses uc where uc.uid=$pid and uc.cid=$cid;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="assets/css/style.css">
-        <title>RateMyUniversity</title>
+        <title>Rate My University</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     </head>
     <body>
@@ -17,7 +17,7 @@
           </ul>
           
           <div style="margin-left:25%;padding:1px 16px;height:1000px;" id="popunjavanje">
-            
+
           </div>
     </body>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
@@ -76,6 +76,35 @@
           },
         });
         popuniProf();
+      }
+
+      function sendForm() {
+        var arr = {};
+        var pid = parseInt($('#professor').find(":selected").val());
+        var cid = parseInt($('#course').find(":selected").val());
+        var pscore = parseInt($('#rateprofessor').find(":selected").text());
+        var cscore = parseInt($('#ratecourse').find(":selected").text());
+        RestClient.get("rest/api/getProfessorCoursesIds/"+pid+"-"+cid, function (result) { localStorage.setItem("ProfessorCourseID", parseInt(result[0].id)); });
+        var pcid=localStorage.getItem("ProfessorCourseID");
+        var currentid = parseInt(LoginService.getLoggedUserId());
+        var isChecked = $('#anonymous').prop('checked');
+        var isCheckedInt = 0;
+        if (isChecked) {
+          isCheckedInt=1;
+        }
+        var now = new Date();
+        var currentTime = now.toISOString().slice(0, 19).replace('T', ' ');
+        var text = $('textarea#notes').val();
+
+        arr['pc_id']=pcid;
+        arr['sid']=currentid;
+        arr['pscore']=pscore;
+        arr['cscore']=cscore;
+        arr['datetime']=currentTime;
+        arr['anonymous']=isCheckedInt;
+        arr['comment']=text;
+
+        RestClient.post("rest/api/addRating", arr, function(result) { alert("Successful!") }, function(result) { alert("Failed!")});
       }
     </script>
 </html>

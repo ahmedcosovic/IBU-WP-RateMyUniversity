@@ -33,12 +33,12 @@ var LoginService = {
       var token = localStorage.getItem("user_token");
       if (token) {
           var user = Utils.parseJwt(token);
-          if (user.admin) {
+          if (user.admin=='1') {
               $("#navigation5").removeClass("hide");
           }
-          if (user.professor) {
+          if (user.professor=='1') {
             $("#navigation4").removeClass("forProfessors");
-          } else {
+          } else if (user.professor=='0') {
             $("#navigation1").removeClass("forStudents");
             $("#navigation2").removeClass("forStudents");
             $("#navigation3").removeClass("forStudents");
@@ -53,6 +53,17 @@ var LoginService = {
       if (token) {
         var user = Utils.parseJwt(token);
         return user.fullname;
+      }
+      else {
+        return null;
+    }
+    },
+
+    getLoggedUserId: function() {
+      var token = localStorage.getItem("user_token");
+      if (token) {
+        var user = Utils.parseJwt(token);
+        return user.id;
       }
       else {
         return null;

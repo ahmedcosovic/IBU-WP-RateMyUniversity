@@ -75,6 +75,9 @@ class RMUService {
     public function getProfessorCourses(){
         return $this->dao->getProfessorCourses();
     }
+    public function getProfessorCoursesIds($pid,$cid){
+        return $this->dao->getProfessorCoursesIds($pid,$cid);
+    }
     public function getCourseProfessors(){
         return $this->dao->getCourseProfessors();
     }

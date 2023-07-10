@@ -1,6 +1,6 @@
 var PageService = {
     home: function() {
-        let popuniti = `<h2 id="usershow">Hello user!</h2>
+        var popuniti = `<h2 id="usershow">Hello user!</h2>
         <h3>Welcome to RateMyUniversity application.</h3>
         <p><b>Rate my professor:</b> Add a new rating for one of your professors.</p>
         <p><b>Rate my course:</b> Add a new rating for one of your courses.</p>
@@ -19,7 +19,7 @@ var PageService = {
         $('#a7').removeClass('active');
     },
     ratemyprofessor: function() {
-        let popuniti = `<form action="/action_page.php"><br>
+        var popuniti = `<form><br>
     
         <label for="course">Select course:</label>
         <select id="course" name="course" onchange="popuniProf()">
@@ -55,7 +55,7 @@ var PageService = {
         <label for="anonymous">Send anonymously:</label>
         <input type="checkbox" id="anonymous" name="anonymous">
       
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" onclick="sendForm()">
       </form>`;
         $('#popunjavanje').empty();
         $('#popunjavanje').append(popuniti);
@@ -69,7 +69,7 @@ var PageService = {
         popuniCourse();
     },
     viewratinghistory: function() {
-        let popuniti = ``;
+        var popuniti = ``;
         $('#popunjavanje').empty();
         $('#popunjavanje').append(popuniti);
         $('#a1').removeClass('active');
@@ -81,7 +81,7 @@ var PageService = {
         $('#a7').removeClass('active');
     },
     viewmyratings: function() {
-        let popuniti = ``;
+        var popuniti = ``;
         $('#popunjavanje').empty();
         $('#popunjavanje').append(popuniti);
         $('#a1').removeClass('active');
@@ -93,7 +93,7 @@ var PageService = {
         $('#a7').removeClass('active');
     },
     admin: function() {
-        let popuniti = ``;
+        var popuniti = ``;
         $('#popunjavanje').empty();
         $('#popunjavanje').append(popuniti);
         $('#a1').removeClass('active');
