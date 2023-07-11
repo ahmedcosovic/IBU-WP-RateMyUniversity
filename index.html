@@ -111,10 +111,32 @@
 
       function tabelaProf() {
         var loggedUser = LoginService.getLoggedUserId();
+        
         RestClient.get("rest/api/getRatingsForProfessor/" + loggedUser, function (result) {
-          for (let line of Object.values(result)) {
-            console.log(line);
+          addString = `<table>
+          <tr>
+            <th id="Student">Student</th>
+            <th id="Course">Course</th>
+            <th id="YourScore">Your score</th>
+            <th id="CourseScore">Course score</th>
+            <th id="TimeOfRating">Time of rating</th>
+            <th id="Notes">Notes</th>
+          </tr>`;
+          for(key in result) {
+            var temp = result[key];
+            var finalArray = JSON.parse(JSON.stringify(temp));
+            addString += `
+          <tr>
+            <td>`+finalArray['Student']+`</td>
+            <td>`+finalArray['Course']+`</td>
+            <td>`+finalArray['Your score']+`</td>
+            <td>`+finalArray['Course score']+`</td>
+            <td>`+finalArray['Time of rating']+`</td>
+            <td>`+finalArray['Notes']+`</td>
+          </tr>`;
           }
+          addString+=`</table>`;
+          $('#popunjavanje').append(addString);
         });
       }
 

@@ -71,7 +71,13 @@ Flight::route('GET /api/searchCourse/@id', function($id){
 Flight::route('GET /api/getUniversities', function(){
     Flight::json(Flight::rmuService()->getUniversities());
 });
-
+/**
+ * @OA\Get(path="/searchUniversities/{keyword}", tags={"universities"}, security={{"ApiKeyAuth": {}}},
+ *         summary="Return all universities by keyword from the API. ",
+ *         @OA\Parameter(in="path",name="keyword",example="IBU",description="University name"),
+ *         @OA\Response( response=200, description="List of universities by keyword.")
+ * )
+ */
 Flight::route('GET /api/searchUniversities/@id', function($id){
     Flight::json(Flight::rmuService()->searchUniversities($id));
 });
@@ -371,7 +377,7 @@ Flight::route('POST /login', function(){
     }
 });
 // Middleware
-Flight::route('/api/*', function () {
+/* Flight::route('/api/*', function () {
     $header = Flight::header("Authorization");
     if (!$header) {
       Flight::json(["message" => "Authorization is missing"], 403);
@@ -387,5 +393,5 @@ Flight::route('/api/*', function () {
         }
     }
   });
-
+ */
 ?>

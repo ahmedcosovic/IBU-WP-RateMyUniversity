@@ -86,9 +86,11 @@ var PageService = {
         tabelaStud();
     },
     viewmyratings: function() {
-        var popuniti = ``;
+        var popuniti = `<h2 id="usershow2">Rating history for user:</h2>`;
         $('#popunjavanje').empty();
         $('#popunjavanje').append(popuniti);
+        var loggedUser = LoginService.getLoggedUser();
+        document.getElementById("usershow2").innerHTML = "Rating history for " + loggedUser + ":";
         $('#a1').removeClass('active');
         $('#a2').removeClass('active');
         $('#a3').removeClass('active');
@@ -96,5 +98,6 @@ var PageService = {
         $('#a5').addClass('active');
         $('#a6').removeClass('active');
         $('#a7').removeClass('active');
+        tabelaProf();
     }
 }
