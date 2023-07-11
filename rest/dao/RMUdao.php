@@ -209,8 +209,36 @@ class RMUDao {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    public function getProfessorCoursesIds($pid,$cid){
+        $query = "select * from user_courses uc where uc.uid=$pid and uc.cid=$cid;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     public function getCourseProfessors(){
         $query = "select c.id as courseid, c.name as course, group_concat(u.id) as userid, group_concat(concat(concat(u.username, ' - '),u.fullname)) as student from user_courses uc join users u on u.id=uc.uid join courses c on c.id=uc.cid where u.professor=1 group by c.id;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getCourseProfessorsByCid($cid){
+        $query = "select c.id as courseid, c.name as course, u.id as profid, u.fullname from user_courses uc join users u on u.id=uc.uid join courses c on c.id=uc.cid where u.professor=1 and c.id=$cid;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getRatingsByStudent($sid){
+        $query = "select up.fullname AS 'Rated professor', r.pscore AS 'Professor rating', c.name AS 'Rated course', r.cscore AS 'Course rating', r.datetime as 'Time of rating', r.comment AS 'Notes', CASE WHEN r.anonymous = 1 THEN 'Yes' ELSE 'No' END AS 'Anonymous' from rating r join user_courses uc on uc.id=r.pc_id join users up on up.id=uc.uid join courses c on c.id=uc.cid where r.sid=$sid;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function getRatingsForProfessor($pid){
+        $query = "select CASE WHEN anonymous = 1 THEN 'Anonymous' ELSE us.fullname END AS 'Student', c.name AS 'Course', r.pscore AS 'Your score', r.cscore AS 'Course score', r.datetime AS 'Time of rating', r.comment AS 'Notes' from rating r join user_courses uc on uc.id = r.pc_id join users up on up.id = uc.uid join users us on us.id = r.sid join courses c on c.id = uc.cid where up.id = $pid;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

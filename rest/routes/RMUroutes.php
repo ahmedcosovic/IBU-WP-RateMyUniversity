@@ -71,7 +71,13 @@ Flight::route('GET /api/searchCourse/@id', function($id){
 Flight::route('GET /api/getUniversities', function(){
     Flight::json(Flight::rmuService()->getUniversities());
 });
-
+/**
+ * @OA\Get(path="/searchUniversities/{keyword}", tags={"universities"}, security={{"ApiKeyAuth": {}}},
+ *         summary="Return all universities by keyword from the API. ",
+ *         @OA\Parameter(in="path",name="keyword",example="IBU",description="University name"),
+ *         @OA\Response( response=200, description="List of universities by keyword.")
+ * )
+ */
 Flight::route('GET /api/searchUniversities/@id', function($id){
     Flight::json(Flight::rmuService()->searchUniversities($id));
 });
@@ -185,6 +191,9 @@ Flight::route('GET /api/getStudentCourses', function(){
 Flight::route('GET /api/getProfessorCourses', function(){
     Flight::json(Flight::rmuService()->getProfessorCourses());
 });
+Flight::route('GET /api/getProfessorCoursesIds/@pid-@cid', function($pid,$cid){
+    Flight::json(Flight::rmuService()->getProfessorCoursesIds($pid,$cid));
+});
 /**
  * @OA\Get(path="/getCourseProfessors", tags={"professors"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return all course professors from the API. ",
@@ -193,6 +202,9 @@ Flight::route('GET /api/getProfessorCourses', function(){
  */
 Flight::route('GET /api/getCourseProfessors', function(){
     Flight::json(Flight::rmuService()->getCourseProfessors());
+});
+Flight::route('GET /api/getCourseProfessorsByCid/@cid', function($cid){
+    Flight::json(Flight::rmuService()->getCourseProfessorsByCid($cid));
 });
 /**
  * @OA\Get(path="/getCourseStudents", tags={"courses"}, security={{"ApiKeyAuth": {}}},
@@ -240,6 +252,15 @@ Flight::route('GET /api/getPrivateRatings', function(){
  *      @OA\Response(response=500,description="Error")
  * )
  */
+
+Flight::route('GET /api/getRatingsByStudent/@id', function($sid){
+    Flight::json(Flight::rmuService()->getRatingsByStudent($sid));
+});
+
+Flight::route('GET /api/getRatingsForProfessor/@pid', function($pid){
+    Flight::json(Flight::rmuService()->getRatingsForProfessor($pid));
+});
+
 Flight::route('POST /api/addUniversity', function() {
     $data = Flight::request()->data->getData();
     Flight::json(Flight::rmuService()->addUniversity($data));
@@ -355,8 +376,8 @@ Flight::route('POST /login', function(){
         Flight::json(["message" => "User doesn't exist"], 404);
     }
 });
-
-Flight::route('/api/*', function () {
+// Middleware
+/* Flight::route('/api/*', function () {
     $header = Flight::header("Authorization");
     if (!$header) {
       Flight::json(["message" => "Authorization is missing"], 403);
@@ -372,5 +393,5 @@ Flight::route('/api/*', function () {
         }
     }
   });
-
+ */
 ?>
