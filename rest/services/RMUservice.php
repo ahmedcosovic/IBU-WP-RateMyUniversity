@@ -75,6 +75,9 @@ class RMUService {
     public function getProfessorCourses(){
         return $this->dao->getProfessorCourses();
     }
+    public function getProfessorCoursesIds($pid,$cid){
+        return $this->dao->getProfessorCoursesIds($pid,$cid);
+    }
     public function getCourseProfessors(){
         return $this->dao->getCourseProfessors();
     }
@@ -134,6 +137,12 @@ class RMUService {
     }
     public function deleteRating($id){
         return $this->dao->deleteRating($id);
+    }
+    public function getRatingsByStudent($sid){
+        return $this->dao->getRatingsByStudent($sid);
+    }
+    public function getRatingsForProfessor($pid){
+        return $this->dao->getRatingsForProfessor($pid);
     }
 }
 ?>

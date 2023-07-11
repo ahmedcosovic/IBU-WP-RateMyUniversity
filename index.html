@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="assets/css/style.css">
-        <title>RateMyUniversity</title>
+        <title>Rate My University</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     </head>
     <body>
@@ -12,12 +12,12 @@
             <li class="forStudents" id="navigation1" onClick="PageService.ratemyprofessor()"><a href="#ratemyprofessor" id="a2">Rate my professor</a></li>
             <li class="forStudents" id="navigation3" onClick="PageService.viewratinghistory()"><a href="#viewratinghistory" id="a4">View rating history</a></li>
             <li class="forProfessors" id="navigation4" onClick="PageService.viewmyratings()"><a href="#viewmyratings" id="a5">View my ratings</a></li>
-            <li class="hide" id="navigation5" onClick="PageService.admin()"><a href="#admin" id="a6">Admin</a></li>
+            <li class="hide" id="navigation5"><a href="rest/docs" id="a6">Admin</a></li>
             <li id="logout" onClick="LoginService.logout()"><a href="#logout" id="a7">Log out</a></li>
           </ul>
           
           <div style="margin-left:25%;padding:1px 16px;height:1000px;" id="popunjavanje">
-            
+
           </div>
     </body>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
@@ -32,9 +32,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script>
         LoginService.checkLoginStatus();
-        var loggedUser = LoginService.getLoggedUser();
         PageService.home();
-        document.getElementById("usershow").innerHTML = "Hello " + loggedUser + "!";
         function popuniProf() {
         var $id = parseInt($('#course').find(":selected").val());
         $.ajax({
@@ -76,6 +74,77 @@
           },
         });
         popuniProf();
+      }
+
+      function tabelaStud() {
+        var loggedUser = LoginService.getLoggedUserId();
+        
+        RestClient.get("rest/api/getRatingsByStudent/" + loggedUser, function (result) {
+          addString = `<table>
+          <tr>
+            <th id="RatedProfessor">Rated professor</th>
+            <th id="ProfessorRating">Professor rating</th>
+            <th id="RatedCourse">Rated course</th>
+            <th id="CourseRating">Course rating</th>
+            <th id="TimeOfRating">Time of rating</th>
+            <th id="Notes">Notes</th>
+            <th id="Anonymous">Anonymous</th>
+          </tr>`;
+          for(key in result) {
+            var temp = result[key];
+            var finalArray = JSON.parse(JSON.stringify(temp));
+            addString += `
+          <tr>
+            <td>`+finalArray['Rated professor']+`</td>
+            <td>`+finalArray['Professor rating']+`</td>
+            <td>`+finalArray['Rated course']+`</td>
+            <td>`+finalArray['Course rating']+`</td>
+            <td>`+finalArray['Time of rating']+`</td>
+            <td>`+finalArray['Notes']+`</td>
+            <td>`+finalArray['Anonymous']+`</td>
+          </tr>`;
+          }
+          addString+=`</table>`;
+          $('#popunjavanje').append(addString);
+        });
+      }
+
+      function tabelaProf() {
+        var loggedUser = LoginService.getLoggedUserId();
+        RestClient.get("rest/api/getRatingsForProfessor/" + loggedUser, function (result) {
+          for (let line of Object.values(result)) {
+            console.log(line);
+          }
+        });
+      }
+
+      function sendForm() {
+        var arr = {};
+        var pid = parseInt($('#professor').find(":selected").val());
+        var cid = parseInt($('#course').find(":selected").val());
+        var pscore = parseInt($('#rateprofessor').find(":selected").text());
+        var cscore = parseInt($('#ratecourse').find(":selected").text());
+        RestClient.get("rest/api/getProfessorCoursesIds/"+pid+"-"+cid, function (result) { localStorage.setItem("ProfessorCourseID", parseInt(result[0].id)); });
+        var pcid=localStorage.getItem("ProfessorCourseID");
+        var currentid = parseInt(LoginService.getLoggedUserId());
+        var isChecked = $('#anonymous').prop('checked');
+        var isCheckedInt = 0;
+        if (isChecked) {
+          isCheckedInt=1;
+        }
+        var now = new Date();
+        var currentTime = now.toISOString().slice(0, 19).replace('T', ' ');
+        var text = $('textarea#notes').val();
+
+        arr['pc_id']=pcid;
+        arr['sid']=currentid;
+        arr['pscore']=pscore;
+        arr['cscore']=cscore;
+        arr['datetime']=currentTime;
+        arr['anonymous']=isCheckedInt;
+        arr['comment']=text;
+
+        RestClient.post("rest/api/addRating", arr, function(result) { alert("Successful!") }, function(result) { alert("Failed!")});
       }
     </script>
 </html>

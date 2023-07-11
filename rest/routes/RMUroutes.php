@@ -185,6 +185,9 @@ Flight::route('GET /api/getStudentCourses', function(){
 Flight::route('GET /api/getProfessorCourses', function(){
     Flight::json(Flight::rmuService()->getProfessorCourses());
 });
+Flight::route('GET /api/getProfessorCoursesIds/@pid-@cid', function($pid,$cid){
+    Flight::json(Flight::rmuService()->getProfessorCoursesIds($pid,$cid));
+});
 /**
  * @OA\Get(path="/getCourseProfessors", tags={"professors"}, security={{"ApiKeyAuth": {}}},
  *         summary="Return all course professors from the API. ",
@@ -243,6 +246,15 @@ Flight::route('GET /api/getPrivateRatings', function(){
  *      @OA\Response(response=500,description="Error")
  * )
  */
+
+Flight::route('GET /api/getRatingsByStudent/@id', function($sid){
+    Flight::json(Flight::rmuService()->getRatingsByStudent($sid));
+});
+
+Flight::route('GET /api/getRatingsForProfessor/@pid', function($pid){
+    Flight::json(Flight::rmuService()->getRatingsForProfessor($pid));
+});
+
 Flight::route('POST /api/addUniversity', function() {
     $data = Flight::request()->data->getData();
     Flight::json(Flight::rmuService()->addUniversity($data));

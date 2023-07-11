@@ -1,6 +1,6 @@
 var PageService = {
     home: function() {
-        let popuniti = `<h2 id="usershow">Hello user!</h2>
+        var popuniti = `<h2 id="usershow">Hello user!</h2>
         <h3>Welcome to RateMyUniversity application.</h3>
         <p><b>Rate my professor:</b> Add a new rating for one of your professors.</p>
         <p><b>Rate my course:</b> Add a new rating for one of your courses.</p>
@@ -10,6 +10,8 @@ var PageService = {
         <p><b>Log out:</b> Log out of the system.</p>`;
         $('#popunjavanje').empty();
         $('#popunjavanje').append(popuniti);
+        var loggedUser = LoginService.getLoggedUser();
+        document.getElementById("usershow").innerHTML = "Hello " + loggedUser + "!";
         $('#a1').addClass('active');
         $('#a2').removeClass('active');
         $('#a3').removeClass('active');
@@ -19,7 +21,7 @@ var PageService = {
         $('#a7').removeClass('active');
     },
     ratemyprofessor: function() {
-        let popuniti = `<form action="/action_page.php"><br>
+        var popuniti = `<form><br>
     
         <label for="course">Select course:</label>
         <select id="course" name="course" onchange="popuniProf()">
@@ -55,7 +57,7 @@ var PageService = {
         <label for="anonymous">Send anonymously:</label>
         <input type="checkbox" id="anonymous" name="anonymous">
       
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" onclick="sendForm()">
       </form>`;
         $('#popunjavanje').empty();
         $('#popunjavanje').append(popuniti);
@@ -69,9 +71,11 @@ var PageService = {
         popuniCourse();
     },
     viewratinghistory: function() {
-        let popuniti = ``;
+        var popuniti = `<h2 id="usershow2">Rating history by user:</h2>`;
         $('#popunjavanje').empty();
         $('#popunjavanje').append(popuniti);
+        var loggedUser = LoginService.getLoggedUser();
+        document.getElementById("usershow2").innerHTML = "Rating history by " + loggedUser + ":";
         $('#a1').removeClass('active');
         $('#a2').removeClass('active');
         $('#a3').removeClass('active');
@@ -79,9 +83,10 @@ var PageService = {
         $('#a5').removeClass('active');
         $('#a6').removeClass('active');
         $('#a7').removeClass('active');
+        tabelaStud();
     },
     viewmyratings: function() {
-        let popuniti = ``;
+        var popuniti = ``;
         $('#popunjavanje').empty();
         $('#popunjavanje').append(popuniti);
         $('#a1').removeClass('active');
@@ -91,18 +96,5 @@ var PageService = {
         $('#a5').addClass('active');
         $('#a6').removeClass('active');
         $('#a7').removeClass('active');
-    },
-    admin: function() {
-        let popuniti = ``;
-        $('#popunjavanje').empty();
-        $('#popunjavanje').append(popuniti);
-        $('#a1').removeClass('active');
-        $('#a2').removeClass('active');
-        $('#a3').removeClass('active');
-        $('#a4').removeClass('active');
-        $('#a5').removeClass('active');
-        $('#a6').addClass('active');
-        $('#a7').removeClass('active');
     }
-    
 }
