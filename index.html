@@ -76,6 +76,48 @@
         popuniProf();
       }
 
+      function tabelaStud() {
+        var loggedUser = LoginService.getLoggedUserId();
+        
+        RestClient.get("rest/api/getRatingsByStudent/" + loggedUser, function (result) {
+          addString = `<table>
+          <tr>
+            <th id="RatedProfessor">Rated professor</th>
+            <th id="ProfessorRating">Professor rating</th>
+            <th id="RatedCourse">Rated course</th>
+            <th id="CourseRating">Course rating</th>
+            <th id="TimeOfRating">Time of rating</th>
+            <th id="Notes">Notes</th>
+            <th id="Anonymous">Anonymous</th>
+          </tr>`;
+          for(key in result) {
+            var temp = result[key];
+            var finalArray = JSON.parse(JSON.stringify(temp));
+            addString += `
+          <tr>
+            <td>`+finalArray['Rated professor']+`</td>
+            <td>`+finalArray['Professor rating']+`</td>
+            <td>`+finalArray['Rated course']+`</td>
+            <td>`+finalArray['Course rating']+`</td>
+            <td>`+finalArray['Time of rating']+`</td>
+            <td>`+finalArray['Notes']+`</td>
+            <td>`+finalArray['Anonymous']+`</td>
+          </tr>`;
+          }
+          addString+=`</table>`;
+          $('#popunjavanje').append(addString);
+        });
+      }
+
+      function tabelaProf() {
+        var loggedUser = LoginService.getLoggedUserId();
+        RestClient.get("rest/api/getRatingsForProfessor/" + loggedUser, function (result) {
+          for (let line of Object.values(result)) {
+            console.log(line);
+          }
+        });
+      }
+
       function sendForm() {
         var arr = {};
         var pid = parseInt($('#professor').find(":selected").val());
