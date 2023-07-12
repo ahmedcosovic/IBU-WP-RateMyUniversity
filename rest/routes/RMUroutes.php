@@ -609,6 +609,28 @@ Flight::route('DELETE /api/deleteRating/@id', function($id) {
 Flight::route('DELETE /api/deleteUser/@id', function($id) {
     Flight::rmuService()->deleteUser($id);
 });
+/**
+* @OA\Post(
+*     path="/../login",
+*     description="Login",
+*     tags={"login"},
+*     @OA\RequestBody(description="Login", required=true,
+*       @OA\MediaType(mediaType="application/json",
+*         @OA\Schema(
+*             @OA\Property(property="username", type="string", example="ahmed.cosovic", description="Username" ),
+*             @OA\Property(property="password", type="string", example="ahmed123",  description="Password" ),
+*        )
+*     )),
+*     @OA\Response(
+*         response=200,
+*         description="Logged in successfully"
+*     ),
+*     @OA\Response(
+*         response=500,
+*         description="Error"
+*     )
+* )
+*/
 
 Flight::route('POST /login', function(){
     $login = Flight::request()->data->getData();
@@ -643,6 +665,5 @@ Flight::route('POST /login', function(){
           return FALSE;
         }
     }
-  });
- */
+  }); */
 ?>

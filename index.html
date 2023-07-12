@@ -49,6 +49,12 @@
         $.ajax({
           url: "rest/api/getCourseProfessorsByCid/" + $id,
           type: "get",
+          beforeSend: function(xhr){
+    if (localStorage.getItem("user_token")){
+xhr.setRequestHeader('Authorization',  localStorage.getItem("user_token"));
+    }
+ },
+
           success: function (data) {
             console.log("data[0]");
             var html = "";
@@ -68,6 +74,12 @@
         $.ajax({
           url: "rest/api/getCourses",
           type: "get",
+          beforeSend: function(xhr){
+    if (localStorage.getItem("user_token")){
+xhr.setRequestHeader('Authorization',  localStorage.getItem("user_token"));
+    }
+ },
+
           success: function (data) {
             console.log("data[0]");
             var html = "";
