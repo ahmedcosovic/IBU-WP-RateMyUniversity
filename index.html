@@ -32,7 +32,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script>
         LoginService.checkLoginStatus();
-        PageService.home();
+        $(document).ready(function() {
+          var hash = window.location.hash.substr(1);
+          if (hash === "ratemyprofessor") {
+            PageService.ratemyprofessor();
+          } else if (hash === "viewratinghistory") {
+            PageService.viewratinghistory();
+          } else if (hash === "viewmyratings") {
+            PageService.viewmyratings();
+          } else {
+            PageService.home();
+          }
+        });
         function popuniProf() {
         var $id = parseInt($('#course').find(":selected").val());
         $.ajax({
@@ -73,7 +84,7 @@
             $("#course").append(html);
           },
         });
-        popuniProf();
+        
       }
 
       function tabelaStud() {
