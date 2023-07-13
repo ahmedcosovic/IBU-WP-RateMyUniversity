@@ -7,20 +7,20 @@ class RMUDao {
     public function __construct(){
         try {
 
-        $servername = "db-mysql-nyc1-71808-do-user-14370278-0.b.db.ondigitalocean.com";
-        $serverport = "25060";
-        $username = "doadmin";
-        $password = "AVNS_SieIIEElOG1zCHaqqfD";
+        $servername = "localhost";
+        $serverport = "3306";
+        $username = "root";
+        $password = "";
         $schema = "rmu";
 
         /*options array neccessary to enable ssl mode - do not change*/
-        $options = array(
-        	PDO::MYSQL_ATTR_SSL_CA => 'https://drive.google.com/file/d/19sYBZ7rApbkHMBs3gW1IvadhrRBkOedW/view?usp=share_link',
+        /*$options = array(
+        	PDO::MYSQL_ATTR_SSL_CA => 'https://drive.google.com/file/d/1g3sZDXiWK8HcPuRhS0nNeoUlOVSWdMAg/view?usp=share_link',
         	PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
 
-        );
+        );*/
 
-        $this->conn = new PDO("mysql:host=$servername;port=$serverport;dbname=$schema;sslmode=REQUIRED;", $username, $password, $options);  
+        $this->conn = new PDO("mysql:host=$servername;port=$serverport;dbname=$schema", $username, $password);  
           $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           echo "Connected successfully";
         } catch(PDOException $e) {
